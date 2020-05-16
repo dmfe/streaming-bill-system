@@ -1,0 +1,16 @@
+version: "2"
+services:
+    postgres:
+        restart: always
+        image: postgres:12.2
+        container_name: postgres
+        ports:
+          - 5432:5432
+        volumes:
+          - ./postgres/init-scripts-runner.sh:/docker-entrypoint-initdb.d/init-scripts-runner.sh
+          - ./postgres/01.schema/:/docker-entrypoint-initdb.d/01.schema
+          - ./postgres/02.data/:/docker-entrypoint-initdb.d/02.data
+        environment:
+          - POSTGRES_DB=sbs
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
