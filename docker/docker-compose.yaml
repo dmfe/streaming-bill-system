@@ -1,16 +1,35 @@
 version: "2"
 services:
-    postgres:
-        restart: always
-        image: postgres:12.2
-        container_name: postgres
-        ports:
-          - 5432:5432
-        volumes:
-          - ./postgres/init-scripts-runner.sh:/docker-entrypoint-initdb.d/init-scripts-runner.sh
-          - ./postgres/01.schema/:/docker-entrypoint-initdb.d/01.schema
-          - ./postgres/02.data/:/docker-entrypoint-initdb.d/02.data
-        environment:
-          - POSTGRES_DB=sbs
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=postgres
+  postgres:
+    image: postgres:12.2
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/init-scripts-runner.sh:/docker-entrypoint-initdb.d/init-scripts-runner.sh
+      - ./postgres/01.schema/:/docker-entrypoint-initdb.d/01.schema
+      - ./postgres/02.data/:/docker-entrypoint-initdb.d/02.data
+    environment:
+      - POSTGRES_DB=sbs
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  cassandra:
+    image: cassandra:3.11.6
+    hostname: cassandra
+    container_name: cassandra
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 9042:9042
+    command: /bin/bash -c "echo 'authenticator":" PasswordAuthenticator' >> /etc/cassandra/cassandra.yaml && /docker-entrypoint.sh cassandra -f"
+
+  cassandra-load-keyspace:
+    restart: 'no'
+    image: cassandra:3.11.6
+    container_name: cassandra-load-keyspace
+    volumes:
+      - ./cassandra/schema.cql:/schema.cql
+    command: /bin/bash -c "sleep 60 && echo creating cassandra keyspace && cqlsh -u cassandra -p cassandra cassandra -f /schema.cql"
+    depends_on:
+      - cassandra
