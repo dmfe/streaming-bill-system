@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_package = "com.nc.sbs.model";
+option java_multiple_files = true;
+option java_outer_classname = "BillingMessages";
+
+import "sbs/messages/payloads/billing_payload.proto";
+
+
+message BillingMessageKey {
+    string id = 1;
+}
+
+message BillingMessage {
+    BillingMessageHeader header = 1;
+    BillingPayload payload = 2;
+}
+
+enum MessageType {
+    UNKNOWN_TYPE = 0;
+    RATED_EVENTS = 1;
+    REJECTED_EVENT = 2;
+}
+
+message BillingMessageHeader {
+    MessageType type = 1;
+    int32 version = 2;
+    string host = 3;
+    int32 processId = 4;
+}

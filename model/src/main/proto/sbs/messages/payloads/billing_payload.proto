@@ -1,0 +1,16 @@
+syntax = "proto3";
+option java_package = "com.nc.sbs.model";
+option java_multiple_files = true;
+
+message BillingPayload {
+    repeated RatedEvent events = 1;
+}
+
+message RatedEvent {
+    string accountId = 1;  // The customer account to which this event belongs.
+    string source = 2;     // Source of event. For example: telephone number.
+    int64 eventDT = 3;     // Date and Time of the event start.
+    int64 eventCost = 4;   // Price of the event.
+    int32 eventTypeId = 5; // Type of the event.
+    int32 planId = 6;      // Id of a tariff plan.
+}
