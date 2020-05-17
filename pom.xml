@@ -25,6 +25,7 @@
     <modules>
         <module>model</module>
         <module>event-aggregator</module>
+        <module>kafkatool-plugin</module>
     </modules>
 
     <dependencyManagement>
