@@ -11,12 +11,20 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <java.version>1.8</java.version>
         <junit.jupiter.version>5.6.2</junit.jupiter.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.surefire.plugin.version>3.0.0-M4</maven.surefire.plugin.version>
         <protobuf.version>3.11.4</protobuf.version>
         <protoc.version>3.11.0</protoc.version>
+        <picocli.version>4.2.0</picocli.version>
+        <lombok.version>1.18.12</lombok.version>
+        <kafka.version>2.4.1</kafka.version>
+        <guava.version>28.2-jre</guava.version>
+        <dropwizard.metrics.version>4.1.5</dropwizard.metrics.version>
+        <slf4j.version>1.7.5</slf4j.version>
+
+        <maven.surefire.plugin.version>3.0.0-M4</maven.surefire.plugin.version>
         <maven.protobuf.plugin.version>0.6.1</maven.protobuf.plugin.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <maven.os.plugin.version>1.6.2</maven.os.plugin.version>
@@ -26,6 +34,7 @@
         <module>model</module>
         <module>event-aggregator</module>
         <module>kafkatool-plugin</module>
+        <module>event-generator</module>
     </modules>
 
     <dependencyManagement>
@@ -36,6 +45,42 @@
                 <version>${protobuf.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>info.picocli</groupId>
+                <artifactId>picocli</artifactId>
+                <version>${picocli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${dropwizard.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
 
             <dependency>
