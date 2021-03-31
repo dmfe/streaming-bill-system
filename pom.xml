@@ -20,7 +20,7 @@
         <picocli.version>4.2.0</picocli.version>
         <lombok.version>1.18.12</lombok.version>
         <kafka.version>2.4.1</kafka.version>
-        <guava.version>28.2-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <dropwizard.metrics.version>4.1.5</dropwizard.metrics.version>
         <slf4j.version>1.7.5</slf4j.version>
 
